@@ -9,6 +9,7 @@ AC_CONFIG_FILES([Makefile \
         hardware.pc
         ])
 
+AM_PROG_AR
 AC_PROG_CXX
 AC_PROG_CC
 
@@ -34,7 +35,7 @@ AC_FUNC_MMAP
 AC_CHECK_FUNCS([memset munmap strerror])
 
 AC_ARG_ENABLE(audio,
-      AC_HELP_STRING([--disable-audio], [Disable audio header installation]),
+      AS_HELP_STRING([--disable-audio], [Disable audio header installation]),
         [has_audio=${enableval}], [has_audio="yes"])
 
 AM_CONDITIONAL(HAS_AUDIO, [test "x${has_audio}" = "xyes"])
@@ -48,25 +49,25 @@ AM_CONDITIONAL([HAL_PATH_SPECIFIED], [test "x${HAL_PATH}" != "xno"])
 AC_SUBST(HAL_PATH)
 
 AC_ARG_ENABLE(camera,
-      AC_HELP_STRING([--disable-camera], [Disable camera header installation]),
+      AS_HELP_STRING([--disable-camera], [Disable camera header installation]),
         [has_camera=${enableval}], [has_camera="no"])
 
 AM_CONDITIONAL(HAS_CAMERA, [test "x${has_camera}" = "xyes"])
 
 AC_ARG_ENABLE(display,
-      AC_HELP_STRING([--disable-display], [Disable display header installation]),
+      AS_HELP_STRING([--disable-display], [Disable display header installation]),
         [has_display=${enableval}], [has_display="yes"])
 
 AM_CONDITIONAL(HAS_DISPLAY, [test "x${has_display}" = "xyes"])
 
 AC_ARG_ENABLE(location,
-      AC_HELP_STRING([--disable-location], [Disable location header installation]),
+      AS_HELP_STRING([--disable-location], [Disable location header installation]),
         [has_location=${enableval}], [has_location="yes"])
 
 AM_CONDITIONAL(HAS_LOCATION, [test "x${has_location}" = "xyes"])
 
 AC_ARG_ENABLE(sensors,
-      AC_HELP_STRING([--disable-sensors], [Disable sensor header installation]),
+      AS_HELP_STRING([--disable-sensors], [Disable sensor header installation]),
         [has_sensors=${enableval}], [has_sensors="no"])
 
 AM_CONDITIONAL(HAS_SENSORS, [test "x${has_sensors}" = "xyes"])

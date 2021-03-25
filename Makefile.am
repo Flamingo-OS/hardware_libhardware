@@ -1,3 +1,4 @@
+ACLOCAL_AMFLAGS = -I m4
 
 lib_LTLIBRARIES = libhardware.la
 
@@ -53,12 +54,12 @@ endif
 
 gralloc_h_sources = modules/gralloc/gralloc_priv.h
 
-libhardware_includedir=$(includedir)/hardware/
+libhardware_includedir      = $(includedir)/hardware/
 libhardware_include_HEADERS = $(h_sources)
 
-libhardware_gralloc_includedir=$(includedir)/libhardware/
+libhardware_gralloc_includedir      = $(includedir)/libhardware/
 libhardware_gralloc_include_HEADERS = $(gralloc_h_sources)
 
-pkgconfigdir = $(libdir)/pkgconfig
+pkgconfigdir   = $(libdir)/pkgconfig
 pkgconfig_DATA = hardware.pc
-EXTRA_DIST = $(pkgconfig_DATA)
+EXTRA_DIST     = $(pkgconfig_DATA)
