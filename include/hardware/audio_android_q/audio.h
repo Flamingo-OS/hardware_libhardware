@@ -252,6 +252,14 @@ struct audio_stream_out {
      */
     int (*set_volume)(struct audio_stream_out *stream, float left, float right);
 
+
+    /**
+     * Use this method in situations where audio mixing is done in the
+     * hardware. This method serves as a direct interface with hardware,
+     * allowing you to directly get the volume as apposed to via the framework.
+     */
+    int (*get_volume)(struct audio_stream_out *stream, float *left, float *right);
+
     /**
      * Write audio buffer to driver. Returns number of bytes written, or a
      * negative status_t. If at least one frame was written successfully prior to the error,
@@ -639,6 +647,13 @@ static inline size_t audio_stream_in_frame_size(const struct audio_stream_in *s)
     return sizeof(int8_t);
 }
 
+/* Callback function used for sending event notifications to client
+ * status
+ *    1-SSR in progress, 0-SSR successfully recovered
+ * priv
+ *    handle to private data.
+ */
+typedef void (*ssr_callback_t)(uint16_t status, void *priv);
 /**********************************************************************/
 
 /**
@@ -825,6 +840,9 @@ struct audio_hw_device {
     int (*set_audio_port_config)(struct audio_hw_device *dev,
                          const struct audio_port_config *config);
 
+    int (*set_ssr_callback)(struct audio_hw_device *dev,
+                             ssr_callback_t cb_func,
+                             void *priv);
 };
 typedef struct audio_hw_device audio_hw_device_t;
 
